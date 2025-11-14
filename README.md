@@ -1,29 +1,27 @@
-from telegram import Update
-from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes
-import random
+# Telegram Funny AI Bot (Railway Deploy)
 
-BOT_TOKEN = "YOUR_BOT_TOKEN"
-OWNER_ID = 1794465007
-CHANNEL_ID = "@G_Fatt_Music"
+This is a Telegram bot that:
+- Automatically replies to users with funny messages 😆
+- Tracks active users
+- Requires users to join a specific Telegram channel before using the bot
+- Allows admin to broadcast messages to all users
+- Works 24/7 on Railway
 
-active_users = set()
+---
 
-FUNNY_REPLIES = [
-    "ဟုတ်啦 🤣 AI Brain.exe ကိုကလည်း နောက်ကျသွားသလို!",
-    "Wait wait... 🤔 စဉ်းစားတယ်—ဟုတ်ပေမဲ့ မကြာခင် ပြန်ပြောမယ်!",
-    "အေးပေမယ့် မင်းကတော့ Question Machine လေးပဲ 🤭",
-    "ကံကောင်းတယ် AI မဆန်လောက်တော့် ပြန်မပြောဘူးဟာ 😆",
-    "ဒါမျိုးမေးတာ မင်းတင်ပဲ bro 😂"
-]
+## ✨ Features
+- 😂 Funny auto replies
+- 🧾 Active user tracking
+- 🔐 Channel join check
+- 👑 Admin panel  
+  - `/users` → Show active users  
+  - `/broadcast <message>` → Send message to all users
+- 🚀 Railway deploy support
+- ⚙ Built using python-telegram-bot v20
 
+---
 
-async def check_join(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user = update.effective_user
-    active_users.add(user.id)
-
-    try:
-        member = await context.bot.get_chat_member(CHANNEL_ID, user.id)
-        if member.status not in ["member", "administrator", "creator"]:
+## 📁 Project Files        if member.status not in ["member", "administrator", "creator"]:
             await update.message.reply_text(
                 "👋 Bot သုံးနိုင်ဖို့ ဒီ Channel ကို Join ပါ👇\n"
                 f"➡️ https://t.me/{CHANNEL_ID[1:]}"
